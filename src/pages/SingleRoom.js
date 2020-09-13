@@ -16,12 +16,37 @@ export class SingleRoom extends Component {
 
   static contextType = RoomContext;
   render() {
+    const { getRoom } = this.context;
+    const room = getRoom(this.state.slug);
+    if (!room) {
+      return (
+        <div className='error'>
+          <h3>No such room could be found...</h3>
+          <Link to='/rooms' className='btn-primary'>
+            back to rooms
+          </Link>
+        </div>
+      );
+    }
+    const {
+      name,
+      description,
+      capacity,
+      size,
+      price,
+      extras,
+      breakfast,
+      pets,
+      images,
+    } = room;
     return (
-      <div>
-        <Hero>
-          <Banner></Banner>
-        </Hero>
-      </div>
+      <Hero hero='roomsHero'>
+        <Banner title={`${name}`}>
+          <Link to='/rooms' className='btn-primary'>
+            back to rooms
+          </Link>
+        </Banner>
+      </Hero>
     );
   }
 }

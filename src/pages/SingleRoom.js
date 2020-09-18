@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Banner from '../components/Banner';
-import Hero from '../components/Hero';
 import { Link } from 'react-router-dom';
 import defaultBcg from '../images/room-1.jpeg';
 import { RoomContext } from '../RoomContext';
+import StyledHero from '../components/StyledHero';
 
 export class SingleRoom extends Component {
   constructor(props) {
@@ -39,14 +39,26 @@ export class SingleRoom extends Component {
       pets,
       images,
     } = room;
+
+    const [mainImg, ...defaultImg] = images;
+    console.log(defaultImg);
     return (
-      <Hero hero='roomsHero'>
-        <Banner title={`${name}`}>
-          <Link to='/rooms' className='btn-primary'>
-            back to rooms
-          </Link>
-        </Banner>
-      </Hero>
+      <>
+        <StyledHero img={mainImg || this.state.defaultBcg}>
+          <Banner title={`${name}`}>
+            <Link to='/rooms' className='btn-primary'>
+              back to rooms
+            </Link>
+          </Banner>
+        </StyledHero>
+        <section className='single-room'>
+          <div className='single-room-images'>
+            {defaultImg.map((image, index) => {
+              return <img key={index} src={image} alt={name} />;
+            })}
+          </div>
+        </section>
+      </>
     );
   }
 }

@@ -124,8 +124,6 @@ const RoomFilter = ({ rooms }) => {
             />
             <label htmlFor='breakfast'>breakfast</label>
           </div>
-        </div>
-        <div className='form-group'>
           <div className='single-extra'>
             <input
               type='checkbox'
